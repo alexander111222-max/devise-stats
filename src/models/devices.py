@@ -15,5 +15,6 @@ class DeviceOrm(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     user: Mapped["UsersOrm"] = relationship(back_populates="devices")
-    measurements: Mapped[list["MeasurementsOrm"]] = relationship(back_populates="device")
-
+    measurements: Mapped[list["MeasurementsOrm"]] = relationship(
+        back_populates="device"
+    )

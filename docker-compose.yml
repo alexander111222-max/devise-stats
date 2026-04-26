@@ -1,0 +1,27 @@
+services:
+  device_stats_back:
+    container_name: device_stats_back
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    networks:
+      - myNetwork
+    env_file:
+      - .env-local
+
+  device_stats_celery_worker:
+    container_name: device_stats_celery_worker
+    build:
+      context: .
+    networks:
+      - myNetwork
+    env_file:
+      - .env-local
+    environment:
+      - C_FORCE_ROOT=true
+    command: "celery --app=src.tasks.celery_app:celery_instance worker -l INFO --concurrency=16"
+
+networks:
+  myNetwork:
+    external: true

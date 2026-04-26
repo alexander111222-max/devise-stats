@@ -4,9 +4,10 @@ from pydantic import BaseModel, EmailStr, ConfigDict
 class UserSchema(BaseModel):
     id: int
     name: str
-    email: EmailStr # для маппера , чтобы возвращать юзера
+    email: EmailStr
 
     model_config = ConfigDict(from_attributes=True)
+
 
 class UserAddSchema(BaseModel):
     name: str

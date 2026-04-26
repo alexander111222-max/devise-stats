@@ -1,9 +1,9 @@
-# src/utils/database
+from src.repositories.devices import DeviceRepository
+from src.repositories.measurements import MeasurementRepository
 from src.repositories.users import UserRepository
 
 
 class DBManager:
-
     def __init__(self, session_factory):
         self.session_factory = session_factory
 
@@ -11,8 +11,8 @@ class DBManager:
         self.session = self.session_factory()
 
         self.users = UserRepository(self.session)
-
-
+        self.devices = DeviceRepository(self.session)
+        self.measurements = MeasurementRepository(self.session)
 
         return self
 
@@ -22,4 +22,3 @@ class DBManager:
 
     async def commit(self):
         await self.session.commit()
-

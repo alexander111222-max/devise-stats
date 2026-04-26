@@ -17,4 +17,4 @@ class MeasurementsOrm(Base):
 
     device_id: Mapped[int] = mapped_column(ForeignKey("devices.id", ondelete="CASCADE"))
     timestamp: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-    device: Mapped["DevicesOrm"] = relationship(back_populates="measurements")
+    device: Mapped["DeviceOrm"] = relationship(back_populates="measurements")
